@@ -20,6 +20,7 @@ def send(msg):
 
 
 send("hu")
+send(DC_MSG)
 
 
 

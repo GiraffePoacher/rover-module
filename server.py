@@ -1,6 +1,4 @@
-from http import server
 import socket
-from sqlite3 import connect
 import threading
 
 PORT = 5050
@@ -14,22 +12,23 @@ server.bind(ADDR)
 
 def handle_client(conn,addr):
     print("New Client: " + str(addr))
-    connected = True
-    while connected:
-        msg = conn.recv(1024).decode(FORMAT) #1kb is way more than neccessary, can optimize but shouldn't cause problems
-        if msg == DC_MSG:
-            connected = False
-        print(msg)
+    connection = True
+    while connection:
+        msg = conn.recv(128).decode(FORMAT) #128bytes is way more than neccessary, can optimize but shouldn't cause problems
+        with open('readme.txt', 'a') as f:
+            f.write(msg)
+        if(len(msg) > 0):
+            print(msg)
     conn.close()
 
 def start():
     server.listen()
-    print(f"Server is listening: {SERVER}")
+    print("Server is listening...")
     while True:
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
-        print("Active Connections = " + str(threading.active_count()-1)) #sub 1 because start thread counts as 1 thread
+        print("ACTIVE CONNECTIONS: " + str(threading.active_count() - 1))
 
 print("Server initialized...")
 start()
