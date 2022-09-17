@@ -1,6 +1,9 @@
 import socket
 import pygame as pg
 
+host = socket.gethostname()
+port = 5555
+
 loop = True
 
 
