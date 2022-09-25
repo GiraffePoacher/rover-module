@@ -15,7 +15,7 @@ def handle_client(conn,addr):
     connection = True
     while connection:
         msg = conn.recv(128).decode(FORMAT) #128bytes is way more than neccessary, can optimize but shouldn't cause problems
-        with open('readme.txt', 'a') as f:
+        with open('readme.txt', 'w') as f:
             f.write(msg)
         if(len(msg) > 0):
             print(msg)
