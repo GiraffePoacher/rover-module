@@ -1,5 +1,4 @@
 from http import client
-from mimetypes import init
 import pygame as pg
 import numpy as np
 
@@ -28,7 +27,13 @@ while True:
             if j.get_button(0):
                 print("x is pressed") 
             if j.get_button(1):
-                print("o is pressed") 
+                print("o is pressed, instastop") #resets the values to stop rover
+                leftWheel1 = 128
+                leftWheel2 = 128
+                leftWheel3 = 128
+                rightWheel1 = 128
+                rightWheel2 = 128
+                rightWheel3 = 128
             if j.get_button(2):
                 print("tri is pressed")
             if j.get_button(3):
@@ -39,21 +44,71 @@ while True:
             input = event.value
             print(event.value)
             if input == (1,0):
-                print("x = 1, right")   
+                leftWheel1 += 10
+                leftWheel2 += 10
+                leftWheel3 += 10
+                rightWheel1 -= 10
+                rightWheel2 -= 10
+                rightWheel3 -= 10
+
+                check(leftWheel1)
+                check(leftWheel2)
+                check(leftWheel3)
+                check(rightWheel1)
+                check(rightWheel2)
+                check(rightWheel3)
+
+                print("right")   
             if input == (0,1):
-                print("y = 1 up")
+                leftWheel1 += 10
+                leftWheel2 += 10
+                leftWheel3 += 10
+                rightWheel1 += 10
+                rightWheel2 += 10
+                rightWheel3 += 10
+
+                check(leftWheel1)
+                check(leftWheel2)
+                check(leftWheel3)
+                check(rightWheel1)
+                check(rightWheel2)
+                check(rightWheel3)
+
+                print("up")
             if input == (-1,0):
-                print("x=-1 left")    
+                leftWheel1 -= 10
+                leftWheel2 -= 10
+                leftWheel3 -= 10
+                rightWheel1 += 10
+                rightWheel2 += 10
+                rightWheel3 += 10
+
+                check(leftWheel1)
+                check(leftWheel2)
+                check(leftWheel3)
+                check(rightWheel1)
+                check(rightWheel2)
+                check(rightWheel3)
+
+                print("left")    
             if input == (0,-1):
-                print("x=-1 down")  
-            if input == (1,1):
-                print("diag 1,1")
-            if input == (-1,1):
-                print("diag -1,1")
-            if input == (1,-1):
-                print("diag 1,-1")
-            if input == (-1,-1):
-                print("diag -1,-1")  
+                leftWheel1 -= 10  #change the values 
+                leftWheel2 -= 10
+                leftWheel3 -= 10
+                rightWheel1 -= 10
+                rightWheel2 -= 10
+                rightWheel3 -= 10
+
+                check(leftWheel1)  #check if values are within given range
+                check(leftWheel2)
+                check(leftWheel3)
+                check(rightWheel1)
+                check(rightWheel2)
+                check(rightWheel3)
+
+                                    #send packet
+
+                print("down")     
 
         elif event.type == pg.JOYDEVICEREMOVED:
             print('EXITTING DEVICE REMOVED')
